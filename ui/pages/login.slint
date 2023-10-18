@@ -1,0 +1,49 @@
+import { StandardButton , LineEdit} from "std-widgets.slint";
+import {SURDialog} from "../../SurrealismUI-main/index.slint";
+
+export struct LoginInfos {
+    name:string,
+    password:string,
+}
+export component Login inherits Rectangle {
+    callback confirm_popup(LoginInfos);
+    callback show_confirm_popup;
+    show_confirm_popup => { confirm_popup.open(); }
+    confirm_popup:=SURDialog {
+        dialog-title: "提示";
+        dialog-details : "输入框不能为空，请输入SN或者箱号、盒号再进行查询！";
+        confirm-btn-theme: Warning;
+        dialog-width:65%;
+        dialog-height:50%;
+        VerticalLayout {
+            HorizontalLayout{
+                Text {text : @tr("账号：");}
+                name_input := LineEdit { 
+                    placeholder-text : @tr("输入账号....");
+                 }
+            }
+            HorizontalLayout{
+                Text {text : @tr("账号：");}
+                password_input := LineEdit { 
+                    placeholder-text : @tr("输入密码....");
+                 }
+            }
+            HorizontalLayout{
+                StandardButton {kind: yes; clicked => {confirm-popup(
+                    
+                )}}
+            }
+        }
+    // confirm=>{
+    //   // debug("confirm btn clicked~!")
+    //   popup_confirmed(
+    //     LoginInfos{
+    //     name:name-input,
+    //     password:password-input
+    //   })
+    // }
+    // cancel => {
+    //   confirm-popup.open()
+    // }
+    }
+  }
